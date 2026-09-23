@@ -1,0 +1,51 @@
+name: ESN Pilote CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  schedule:
+    - cron: '0 0 * * 0' # Hebdo
+
+jobs:
+  lint-unit:
+    name: Lint & Unit Tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Dummy Lint
+        run: echo "Linting and Unit Tests..." && exit 0
+
+  integration:
+    name: Integration Tests
+    runs-on: esn-linux
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Dummy Integration
+        run: echo "Integration Tests..." && exit 0
+
+  e2e:
+    name: E2E Tests
+    runs-on: esn-windows
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'needs-e2e')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Dummy E2E
+        run: echo "E2E Tests..." && exit 0
+
+  security:
+    name: Security Scan
+    runs-on: esn-linux
+    if: github.event_name == 'pull_request' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Dummy Security
+        run: echo "Security Scan..." && exit 0
