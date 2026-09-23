@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Dummy Lint
-        run: echo "Linting and Unit Tests..." && exit 0
+        run: echo "Linting and Unit Tests..." && exit 1
 
   integration:
     name: Integration Tests
@@ -28,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Dummy Integration
-        run: echo "Integration Tests..." && exit 0
+        run: echo "Integration Tests..." && exit 1
 
   e2e:
     name: E2E Tests
@@ -38,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Dummy E2E
-        run: echo "E2E Tests..." && exit 0
+        run: echo "E2E Tests..." && exit 1
 
   security:
     name: Security Scan
@@ -48,4 +48,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Dummy Security
-        run: echo "Security Scan..." && exit 0
+        run: echo "Security Scan..." && exit 1
